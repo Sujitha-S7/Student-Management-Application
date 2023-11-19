@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Details</title>
+    <!-- Your CSS styles here -->
+</head>
+<body>
+    <div id="studentAcademicDetails"></div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullname = urlParams.get('fullname');
+
+        fetch('student_records.json')
+            .then(response => response.json())
+            .then(data => displayAcademicDetails(data, fullname))
+            .catch(error => console.error('Error:', error));
+
+        function displayAcademicDetails(studentData, fullname) {
+            const academicDetailsElement = document.getElementById('academicDetails');
+            const student = studentData[fullname];
+
+            if (student) {
+                academicDetailsElement.innerHTML += `<h2>Academic Details for ${fullname}</h2>`;
+                academicDetailsElement.innerHTML += `<p>Total Marks: ${student.total_marks}</p>`;
+                academicDetailsElement.innerHTML += `<p>Average Marks: ${student.average_marks}</p>`;
+
+                // Loop through each subject's marks and grades
+                for (const subject in student.marks) {
+                    if (student.marks.hasOwnProperty(subject)) {
+                        const { marks, grade } = student.marks[subject];
+                        academicDetailsElement.innerHTML += `<p><strong>${subject}:</strong> Marks - ${marks}, Grade - ${grade}</p>`;
+                    }
+                }
+            } else {
+                academicDetailsElement.innerHTML = '<p>Student data not found.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <title>AIET</title>
+    <style>
+:root {
+  --color-primary:slateblue;
+  --color-white: #e9e9e9;
+  --color-black: #141d28;
+  --color-black-1: #212b38;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif; 
+}
+
+.logo {
+  color: var(--color-white);
+  font-size: 30px;
+  font-family: Futura;
+}
+
+.logo span {
+  color: var(--color-white);
+}
+
+.menu-bar {
+  background-color: #0056b3;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  padding: 0 5%;
+  top: 0; /* Stick to the top */
+  z-index: 100; /* Higher z-index to ensure it's above other content */
+}
+
+.menu-bar ul {
+  list-style: none;
+  display: flex;
+}
+
+.menu-bar ul li {
+  /* width: 120px; */
+  padding: 10px 30px;
+  /* text-align: center; */
+
+  position: relative;
+}
+
+.menu-bar ul li a {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+
+  transition: all 0.3s;
+}
+
+.menu-bar ul li a:hover {
+  color: gold;
+}
+
+.fas {
+  float: right;
+  margin-left: 10px;
+  padding-top: 3px;
+}
+
+/* dropdown menu style */
+.dropdown-menu {
+  display: none;
+}
+
+.menu-bar ul li:hover .dropdown-menu {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color:#1560BD;
+  z-index: 2; 
+  border-radius: 15%;
+}
+
+.menu-bar ul li:hover .dropdown-menu ul {
+  display: block;
+  margin: 10px;
+  border-radius: 37%;
+}
+
+.menu-bar ul li:hover .dropdown-menu ul li {
+  width: 150px;
+  padding: 10px;
+}
+
+.dropdown-menu-1 {
+  display: none;
+}
+
+.company-header {
+    display: flex;
+    align-items: center;
+    color: gold;
+    font-family: Avenir;
+  }
+  .company-icon {
+    width: 55px;
+    height: 60px;
+    margin-right: 10px;
+  }
+
+  .container {
+    display: flex;
+    margin-top: 80px;
+  }
+
+  .left-panel {
+    width: 25%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    margin-top: 80px;
+    background-image: url(lbg2.jpg);
+  }
+
+  .right-panel {
+    width: 75%;
+    padding: 20px;
+    margin-left: 25%;
+    background-color: #fff;
+    transition: margin-left 0.5s;
+  }
+
+  .link {
+    cursor: pointer;
+    color: #007BFF;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border-bottom: 3px solid transparent; /* Add a transparent underline */
+    width: 80%;
+    transition: color 0.3s, border-color 0.3s; /* Add transition for color and border-color */
+    font-size: 24px;
+  }
+
+  .link:hover {
+    color: #0056b3;
+    border-color: #0056b3; /* Show the underline on hover */
+  }
+
+  .slideshow-container {
+    position: absolute;
+    top: 13%;
+    width: 95vw; 
+    left: 0;
+    right: 0;
+    height: 95vh; 
+    overflow: hidden;
+    margin: auto;
+  }
+
+  .slideshow-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+  }
+  .company-header {
+    display: flex;
+    align-items: center;
+    color: gold;
+    font-family: Avenir;
+  }
+  .company-icon {
+    width: 55px;
+    height: 60px;
+    margin-right: 10px;
+  }
+
+  .footer {
+    background-color:#0056b3;
+    color: gold;
+    padding: 30px;
+    top: 180%;
+    font-weight: bold;
+    position: absolute;
+  }
+
+
+  .footer-section {
+    display: inline-block;
+    margin-right: 30px;
+    vertical-align: top;
+    color: var(--color-white);
+  }
+
+  .footer-section h3 {
+    margin-bottom: 10px;
+    color: gold;
+  }
+
+  .footer-links {
+    color:var(--color-white);
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 5px;
+  }
+
+  .footer-links li a {
+    color: var(--color-white);
+    text-decoration: none;
+  }
+  .footer-contact {
+    margin-top: 10px;
+  }
+
+  .box {
+    display: inline-block;
+    width: 250px;
+    height: 150px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    border: hidden;
+  }
+
+  .box img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    transition: transform 0.3s;
+  }
+
+  .box:hover img {
+    transform: scale(1.1);
+    background-color: gold;
+  }
+
+  .box span {
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+  }
+  .box:hover{
+    background-color: gold;
+  }
+
+  .box:hover span {
+    background-color:slateblue;
+  }
+  body1 {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  body2 {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s, filter 0.3s;
+  }
+
+  .image:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .image-container:hover img{
+    transform: scale(1.1);
+  }
+
+  .image-container:hover {
+    border: 3px solid slateblue; /* Add border on hover */
+  }
+  
+  .image-name {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .image-container:hover .image-name {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .about-section {
+    background-color:#0056b3;
+    color: white;
+    padding: 50px;
+    text-align: center;
+    position: absolute;
+    top: 118%;
+    
+  }
+
+  .company-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+
+  .description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: palevioletred;
+    color: #333;
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .contact-button:hover {
+    background-color:goldenrod;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+    background-color:white;
+    overflow: hidden;
+    border-radius: 25%;
+  }
+
+  .center-text {
+    position: absolute;
+    left: 40%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: gold;
+    color: slateblue;
+    font-size: 24px;
+    text-align: center;
+    animation: moveText 8s linear infinite alternate;
+    border-radius: 25%;
+    width: 37%;
+    font-weight: bold;
+  }
+  .animated-text {
+  position: absolute;
+  bottom: 70px; /* Adjust the distance from the bottom */
+  left: 24%;
+  transform: translateX(-50%);
+  text-align: center;
+  animation: bounceText 2s infinite;
+  font-size: 44px; /* Increased font size */
+  font-weight: bold; /* Set to bold */
+  color: white; /* White color */
+}
+
+  @keyframes bounceText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+</style>
+  </head>
+  <body>
+    <header>
+    <div class="menu-bar">
+      <div class="company-header">
+        <img src="logo112.jpeg" alt="Company Icon" class="company-icon">
+        <div style="display: inline-block; vertical-align: top;">
+            <h1 style="font-size: 37px; margin: 0;color:white;">AIET</h1>
+          </div>
+          <div style="display: block; margin-top: 10px;">
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arminsjova Institute of Engineering and Technology</h2>      
+          </div>
+          
+      </div>
+      <ul>
+        <li><a href="sm1.php">login</a></li>
+      </ul>
+    </div>
+    </header>
+    <div class="slideshow-container" id="slideshow">
+        <img src="s2.jpg" alt="Slide 1">
+        <img src="c7.jpg" alt="Slide 2">
+        <img src="c2.jpg" alt="Slide 3">
+        <img src="c6.jpg" alt="Slide 4">
+        <img src="c4.jpg" alt="Slide 5">
+        <img src="c1.jpg" alt="Slide 6">        
+    </div>
+    <div class="animated-text">
+      <p>Click the login to view student records</p>
+    </div>
+    <div class="about-section">
+        <div class="company-name"  style="color: white;">ABOUT US<br>
+          <h5 style="color: gold;">Arminsjova Institute of Engineering and Technology (AIET)</h5>
+        </div><br>
+        <div class="description">
+          Welcome to Arminsjova Institute of Engineering and Technology (AIET), where innovation meets education. Established with a vision to nurture the next generation of engineers and technology leaders, AIET is a leading institution dedicated to excellence in engineering and technology education.
+        </div>
+        <a class="contact-button" href="knowmore.html">KNOW MORE</a>
+      </div>
+
+    <script>
+      const slideshowContainer = document.getElementById('slideshow');
+      const images = slideshowContainer.getElementsByTagName('img');
+      let currentImageIndex = 0;
+    
+      function showNextImage() {
+        images[currentImageIndex].style.opacity = 0;
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        images[currentImageIndex].style.opacity = 1;
+      }
+    
+      images[currentImageIndex].style.opacity = 1; 
+      setInterval(showNextImage, 2000); 
+    </script>
+
+</body>
+</html>

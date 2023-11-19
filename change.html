@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Apply a background color and font styles to the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the header with a background color and center the text */
+        header {
+            background-color: #0078d4;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Style the main content area */
+        main {
+            padding: 20px;
+        }
+
+        /* Style the sections */
+        section {
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style the input fields and buttons */
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],/* Add this line for date input */
+        button {
+            padding: 8px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #005da3;
+        }
+        .button-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: red;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 12px 24px; 
+            font-size: 16px; 
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>STUDENT RECORD</h1>
+        <div class="button-container">
+            <form id="backForm" action="sm1.php">
+                <button type="submit">Back</button>
+            </form>
+        </div>
+    </header>
+    
+    <main>
+        <section id="create">
+            <h2 style="align-items: center; text-align: center; font-size: larger;">ADD STUDENT RECORD</h2>
+            <form id="student-form" action="process_marks.php" method="post">
+                <fieldset>
+                    <legend style="font-weight: bold; font-size: 24px; color: #007BFF;">Student Information</legend><br>
+                    &nbsp;&nbsp;&nbsp;<label for="Fullname">Student Name:</label>
+                    <input type="text" id="Fullname" name="Fullname" placeholder="Name" required><br><br>
+                    &nbsp;&nbsp;&nbsp;<label for="Age">Student Age:&nbsp;&nbsp;&nbsp;</label>
+                    <input type="number" id="Age" name="Age" placeholder="Age" required><br><br>
+                    &nbsp;&nbsp;&nbsp;<label for="dob">Date of Birth:&nbsp;&nbsp;&nbsp;</label>
+                    <input type="date" id="dob" name="dob" placeholder="Date of Birth" required><br><br>
+                    &nbsp;&nbsp;&nbsp;<label for="Class">Student Email:</label>
+                    <input type="text" id="Class" name="Class" placeholder="Class" required><br><br>
+                    <legend style="font-weight: bold; font-size: 24px; color: #007BFF;">Academic Details</legend><br><br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Marks</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Discrete Structures and Combinatorics</td>
+                                        <td><input type="number" name="discrete" min="0" max="100" onchange="calculateGrade('discrete', 'grade_discrete'), calculateTotalAndAverage()"></td>
+                                        <td><span id="grade_discrete"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Intelligent Agent</td>
+                                        <td><input type="number" name="agent" min="0" max="100" onchange="calculateGrade('agent', 'grade_agent'), calculateTotalAndAverage()"></td>
+                                        <td><span id="grade_agent"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Computer Organization and Architecture</td>
+                                        <td><input type="number" name="coa" min="0" max="100" onchange="calculateGrade('coa', 'grade_coa'), calculateTotalAndAverage()"></td>
+                                        <td><span id="grade_coa"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Programming Paradigms– II</td>
+                                        <td><input type="number" name="paradigms" min="0" max="100" onchange="calculateGrade('paradigms', 'grade_paradigms'), calculateTotalAndAverage()"></td>
+                                        <td><span id="grade_paradigms"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Algorithms and Complexity – I</td>
+                                        <td><input type="number" name="algorithms" min="0" max="100" onchange="calculateGrade('algorithms', 'grade_algorithms'), calculateTotalAndAverage()"></td>
+                                        <td><span id="grade_algorithms"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Database Management Systems Laboratory</td>
+                                        <td><input type="number" name="dbms" min="0" max="100" onchange="calculateGrade('dbms', 'grade_dbms'), calculateTotalAndAverage()"></td>
+                                        <td><span id="grade_dbms"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset><br><br>
+                <p>Total Marks: <span id="total"></span></p><br>
+                <p>Average Marks: <span id="average"></span></p><br><br>
+                
+                <div style="text-align: center;">
+                    <input type="submit" value="SAVE RECORD" name="save" class="btn">
+                </div>
+            </form>
+        </section>
+        
+        <script>
+            function calculateGrade(subject, gradeField) {
+            const marks = parseFloat(document.getElementsByName(subject)[0].value);
+
+            let grade = '';
+            if (marks >= 90) {
+                grade = 'A+';
+            } else if (marks >= 80) {
+                grade = 'A';
+            } else if (marks >= 70) {
+                grade = 'B';
+            } else if (marks >= 60) {
+                grade = 'C';
+            } else if (marks >= 50) {
+                grade = 'D';
+            } else {
+                grade = 'F';
+            }
+
+            document.getElementById(gradeField).innerText = grade;
+        }
+
+        function calculateTotalAndAverage() {
+            const marksElements = document.querySelectorAll('input[type="number"]');
+            let total = 0;
+            let count = 0;
+
+            marksElements.forEach((element) => {
+                if (!isNaN(parseFloat(element.value))) {
+                    total += parseFloat(element.value);
+                    count++;
+                }
+            });
+
+
+            const average = count > 0 ? total / count : 0;
+
+            document.getElementById('total').innerText = total;
+            document.getElementById('average').innerText = average.toFixed(2);
+        }
+        </script>
+    </main>
+</body>
+</html>
